@@ -32,10 +32,7 @@ Java is a new paradigm |
 
 ```java
 //SOLUCAO 1
-<<<<<<< HEAD
-=======
 
->>>>>>> 6308c338af738bfc233a48bb90df7b8b01771652
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
