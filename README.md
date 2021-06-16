@@ -32,39 +32,46 @@ Java is a new paradigm |
 
 ```java
 //SOLUCAO 1
-
-//O
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
-public class ConjuntoBomRuim {
+public class MaiorSubstring {
+
+    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    static PrintWriter out = new PrintWriter(System.out);
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int entradaDados = Integer.valueOf(br.readLine());
-
-        while (entradaDados != 0) {
-            List<String> conjunto = new ArrayList<>();
-            for (int i = 0; i < entradaDados; i++)
-                conjunto.add(br.readLine());
-
-            conjunto = conjunto.stream().sorted().collect(Collectors.toList());
-
-            String saida = "Conjunto Bom";
-            for (int i = 0; i < entradaDados - 1; i++) {
-                if (conjunto.get(i + 1).startsWith(conjunto.get(i))) {
-                    saida = "Conjunto Ruim";
-                    break;
-                }
+        String primeiraLinha, segundaLinha, auxMin, auxMax;
+        while ((primeiraLinha = in.readLine()) != null) {
+            segundaLinha = in.readLine();
+            if ( primeiraLinha.length() > segundaLinha.length() ) {  
+                auxMax = primeiraLinha;
+                auxMin = segundaLinha;
+            } else {
+                auxMax = segundaLinha;
+                auxMin = primeiraLinha;
             }
-
-            System.out.println(saida);
-            entradaDados = Integer.valueOf(br.readLine());
+            int tamanhoMinimoString = auxMin.length();
+            int tamanhoMaximoString = tamanhoMinimoString;
+            boolean f = true;
+            while (tamanhoMaximoString > 0 && f) {
+                int strDiferenca = tamanhoMinimoString - tamanhoMaximoString;
+                for (int i = 0; i <= strDiferenca; i++) {
+                    if (auxMax.contains(auxMin.substring(i, i + tamanhoMaximoString))) {
+                        f = false;
+                        tamanhoMaximoString++;
+                        break;
+                    }
+                }
+                tamanhoMaximoString--;
+            }
+            System.out.println(tamanhoMaximoString);
         }
+        out.close();
     }
+
 }
 ```
 

@@ -9,31 +9,31 @@ public class MaiorSubstring {
     static PrintWriter out = new PrintWriter(System.out);
 
     public static void main(String[] args) throws IOException {
-        String primeiraLinha, segundaLinha, min, max;
+        String primeiraLinha, segundaLinha, auxMin, auxMax;
         while ((primeiraLinha = in.readLine()) != null) {
             segundaLinha = in.readLine();
             if ( primeiraLinha.length() > segundaLinha.length() ) {  
-                max = primeiraLinha;
-                min = segundaLinha;
+                auxMax = primeiraLinha;
+                auxMin = segundaLinha;
             } else {
-                max = segundaLinha;
-                min = primeiraLinha;
+                auxMax = segundaLinha;
+                auxMin = primeiraLinha;
             }
-            int tamanhoMinimoString = min.length();
-            int maxS = tamanhoMinimoString;
+            int tamanhoMinimoString = auxMin.length();
+            int tamanhoMaximoString = tamanhoMinimoString;
             boolean f = true;
-            while (maxS > 0 && f) {
-                int diff = tamanhoMinimoString - maxS;
-                for (int i = 0; i <= diff; i++) {
-                    if (max.contains(min.substring(i, i + maxS))) {
+            while (tamanhoMaximoString > 0 && f) {
+                int strDiferenca = tamanhoMinimoString - tamanhoMaximoString;
+                for (int i = 0; i <= strDiferenca; i++) {
+                    if (auxMax.contains(auxMin.substring(i, i + tamanhoMaximoString))) {
                         f = false;
-                        maxS++;
+                        tamanhoMaximoString++;
                         break;
                     }
                 }
-                maxS--;
+                tamanhoMaximoString--;
             }
-            System.out.println(maxS);
+            System.out.println(tamanhoMaximoString);
         }
         out.close();
     }
